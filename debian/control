@@ -1,0 +1,12 @@
+Source: ros-hydro-fremengrid
+Section: misc
+Priority: extra
+Maintainer: Tom Krajnik <tkrajnik@lincoln.ac.uk>
+Build-Depends: debhelper (>= 9.0.0), libpcl-1.7-all-dev, ros-hydro-actionlib, ros-hydro-actionlib-msgs, ros-hydro-catkin, ros-hydro-genmsg, ros-hydro-message-generation, ros-hydro-message-runtime, ros-hydro-pcl-conversions, ros-hydro-pcl-ros, ros-hydro-roscpp, ros-hydro-rospy, ros-hydro-sensor-msgs, ros-hydro-std-msgs
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-hydro-fremengrid
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libpcl-1.7-all, ros-hydro-actionlib, ros-hydro-actionlib-msgs, ros-hydro-genmsg, ros-hydro-message-runtime, ros-hydro-pcl-conversions, ros-hydro-pcl-ros, ros-hydro-roscpp, ros-hydro-rospy, ros-hydro-sensor-msgs, ros-hydro-std-msgs, ros-hydro-visualization-msgs
+Description: Frequency Map Enhanced 3D occupancy grid - non uniform Fourier transform version
