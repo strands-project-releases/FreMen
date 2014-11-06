@@ -1,11 +1,13 @@
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Changelog for package froctomap
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Changelog for package frenap
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-0.1.0 (2014-11-06)
+0.0.2 (2014-11-06)
 ------------------
-
-0.0.1 (2014-11-04)
-------------------
-* Fremen cleanup and release prep
+* Fix
+* Fix
+* 0.1.0
+* updated Changelogs
+* 0.0.1
+* CHANGELOG.rst
 * Contributors: Tom Krajnik
