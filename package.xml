@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>froctomap</name>
-  <version>0.0.3</version>
+  <version>0.1.0</version>
   <description>
   The FrOctoMap (Frequency Enhanced OctoMap) method allows for efficient volumetric representation of dynamic three-dimensional environments over long periods of time.
   It is based on combination of a well-established 3D mapping framework called Octomaps and an idea to model environment dynamics by its frequency spectrum (FreMeN) [3].
@@ -51,24 +51,30 @@
   <build_depend>rospy</build_depend>
   <build_depend>sensor_msgs</build_depend>
   <build_depend>std_msgs</build_depend>
-	<build_depend>octomap</build_depend>
-	<build_depend>message_generation</build_depend>
-	<build_depend>genmsg</build_depend>
-	<build_depend>message_runtime</build_depend>
-	<run_depend>pcl_conversions</run_depend>
-	<run_depend>pcl_ros</run_depend>
+  <build_depend>octomap</build_depend>
+  <build_depend>octomap_server</build_depend>
+  <build_depend>message_generation</build_depend>
+  <build_depend>genmsg</build_depend>
+  <build_depend>message_runtime</build_depend>
+  <build_depend>visualization_msgs</build_depend>
+  <build_depend>libfftw3</build_depend>
+
+  <run_depend>octomap_server</run_depend>
+  <run_depend>pcl_conversions</run_depend>
+  <run_depend>pcl_ros</run_depend>
   <run_depend>roscpp</run_depend>
   <run_depend>rospy</run_depend>
   <run_depend>std_msgs</run_depend>
-	<run_depend>visualization_msgs</run_depend>
-	<run_depend>octomap</run_depend>
-	<run_depend>message_runtime</run_depend>
-	<run_depend>genmsg</run_depend>
-	<run_depend>sensor_msgs</run_depend>
+  <run_depend>visualization_msgs</run_depend>
+  <run_depend>octomap</run_depend>
+  <run_depend>message_runtime</run_depend>
+  <run_depend>genmsg</run_depend>
+  <run_depend>sensor_msgs</run_depend>
   <run_depend>pcl_conversions</run_depend>
   <run_depend>pcl_ros</run_depend>
-<build_depend>libpcl-all-dev</build_depend>
+  <build_depend>libpcl-all-dev</build_depend>
   <run_depend>libpcl-all</run_depend>
+  <run_depend>libfftw3</run_depend>
 
 <build_depend>actionlib</build_depend>
 <build_depend>actionlib_msgs</build_depend>
