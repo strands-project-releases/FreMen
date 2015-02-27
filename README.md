@@ -1,3 +1,27 @@
+## fremen (indigo) - 0.1.0-0
+
+The packages in the `fremen` repository were released into the `indigo` distro by running `/usr/bin/bloom-release -n -t indigo -r indigo fremen` on `Fri, 27 Feb 2015 15:08:00 -0000`
+
+These packages were released:
+- `fremengrid`
+- `frenap`
+- `froctomap`
+
+Version of package(s) in repository `fremen`:
+- upstream repository: https://github.com/strands-project/fremen.git
+- release repository: unknown
+- rosdistro version: `null`
+- old version: `null`
+- new version: `0.1.0-0`
+
+Versions of tools used:
+- bloom version: `0.5.19`
+- catkin_pkg version: `0.2.7`
+- rosdep version: `0.11.2`
+- rosdistro version: `0.4.1`
+- vcstools version: `0.1.36`
+
+
 ## fremen (hydro) - 0.1.0-0
 
 The packages in the `fremen` repository were released into the `hydro` distro by running `/usr/bin/bloom-release fremen -t hydro -r hydro` on `Sat, 08 Nov 2014 02:11:14 -0000`
