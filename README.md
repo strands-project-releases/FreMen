@@ -1,25 +1,83 @@
-FreMEn
-======
-Frequency Map Enhancement (FreMEn) is a method that allows to introduce dynamics into spatial models used in the mobile robotics domain.
-Many of these models describe the environment by a set of discrete components with binary states.
-For example, cells of an occupancy grid are occupied or free, edges of a topological map are traversable or not, doors are opened or closed, rooms are vacant or occupied, landmarks are visible or occluded, etc.
-Typically, the state of every model component is uncertain, because it is measured indirectly by means of sensors which are affected by noise.
-The uncertainty is typically represented by means of a probability, that is normally considered a static variable.
-Thus, the probability of a particular component being in a particular state remains constant unless the state is being measured by the robot.
+# Overview
 
-Frequency Map Enhancement considers the probability of each environment state as a function of time and represents it by a combination of harmonic components.
-The idea assumes that in populated environments, many of the observed changes are caused by humans performing their daily activities.
-Therefore, the environment's dynamics is naturally periodic and can be modelled by its frequency spectrum that represent a combination of harmonic functions that correspond to periodic processes influencing the environment.
-Such a model not only allows representation of environment dynamics over arbitrary timescales with constant memory requirements, but also prediction of future environment states.
-The proposed approach can be applied to many of the state-of-the-art environment models.
+The FremenServer is a tool for prediction of binary states based on non-uniform, incremental Fourier Transform.
+It uses frequency spectrum analysis to identify reoccuring patterns in temporal sequences of binary states and represents the probability of these states in an analythical form as a combination of harmonic functions. 
+This allows to learn long-term dynamics of the environment and use the learned experience to predict states of the world models used in mobile robotics.
+This ability is beneficial for tasks like self-localization, object search, path planning, anomaly detection and exploration.
 
-In particular, we have shown that occupancy grids, topological or landmark maps can be easily extended by FreMEn.
-- We have shown that the FreMEn allows to represent millions of observations by a few spectral parameters, can reliably predict environment states and detect anomalies [1].
-- Applying FreMEn to visibility of visual features improves mobile robot localisation in [changing environments](https://www.youtube.com/watch?v=8AwQrtuNwuA&list=UUJxXV1gKZsmoeoUKE4xo0kA) [2].
-- Combining FreMEn with Octomaps results in an efficient spatio-temporal environment model called FrOctoMAp [3] that achieves compression rates up to 1:100000 for timescales over three months.
+## Practical 
 
-======
-1. T.Krajnik, J.P.Fentanes, G.Cielniak, C.Dondrup, T.Duckett: <b>[Spectral Analysis for Long-Term Robotic Mapping.](http://labe.felk.cvut.cz/~tkrajnik/papers/fremen_2014_ICRA.pdf)</b> ICRA 2014.
-2. T.Krajnik, J.P.Fentanes, O.M.Mozos, T.Duckett, J.Ekekrantz, M.Hanheide: <b>[Long-term topological localisation for service robots in dynamic environments using spectral maps.](http://labe.felk.cvut.cz/~tkrajnik/papers/fremen_2014_IROS.pdf)</b> IROS 2014.
-3. T.Krajnik, J.M.Santos, B.Seemann, T.Duckett: <b>[FROctomap: An Efficient Spatio-Temporal Environment Representation.](http://labe.felk.cvut.cz/~tkrajnik/papers/fremen_2014_TAROS.pdf)</b> TAROS 2014.
+The FremenServer is an action server that maintains a collection of state models, each with a different **id**.
+Six different operations can be performed with each state held in the collection.
+These correspond to six types of goals specified in the **operation** string that are related to a state given by its **id**.
 
+###The 'add' operation
+
+This allows to add a sequence of observed **states** along with the **times** of observations to the model of the state **id**.
+If the **id** is given for the first time, a new state is created and filled with the values.
+The **add** operation remembers the last timestamp that was provided and adds only newer observation to the model.
+
+####Inputs
+- **id** identification of the state that is concerned. If the **id** did not exist, a new state will be created. 
+- **states** a sequence of zeroes and ones observed at
+- **times** which are in seconds. The length of the fields **times** and **states** has to be the same.
+
+####Outputs
+- **success** contains a number of observation added to the model. Note that this might be lower than the length of the **states** in case that some of the **times** are older that the **times** of the previous step. Equals to -2 if **times** and **states** have different lengths. 
+- **message** contains more detailed report or error message.
+
+###The 'predict' operation
+This operation calculates the **probabilities** of the state **id**  for the given **times**.
+
+####Inputs
+- **id** is identification of the state that is concerned. If the **id** does not exist, an error is reported.
+- **times** at which the **probabilities** of the state should be estimated (in seconds).
+- **order** of the model used for the estimation. The **order** equals to the number of periodic processes to be modeled. Setting the order to 0 results in a static model with **probabilities** constant in time.
+
+####Outputs
+- **success** contains the number of predicted states or -1 if the state **id** does not exist.
+- **message** contains a detailed report or error message.
+- **probabilities** is an array of predicted probabilities of the state **id** at given **times**.
+
+###The 'entropy' operation 
+This operation calculates the **entropies** of the state **id**  for the given **times**.
+
+####Inputs
+- **id** is an identification of the state that is concerned. If the **id** did not exist, an error is reported.
+- **times** are time instants at which the **entropies** of the state should be estimated.
+- **order** equals to the number of periodic processes to be modeled, i.e. model order. Setting **order** to 0 results in a static model, so that the **entropies** will be constant in time.
+
+####Outputs
+- **success** is the number of predicted states, -1 if **id** does not exist.
+- **message** contains a detailed report or an error message.
+- **entropies** is an array of state's **id** predicted entropies at given **times**.
+
+###The 'evaluate' operation 
+The **evaluate** operation is meant to support decisions what model order to use for probability and entropy predictions.
+It allows to calculate the prediction error of the various model orders of a given (by **id**) state.
+The user provides a sequence of observed **states** and **times** of observations and a maximal **order** to be evaluated.
+The server performs predictions for the given **times** and **orders**, compares those with the provided **states** and calculates the percentage of unsuccessful predictions for model orders from 0 to **order**.
+
+####Inputs
+- **id** identification of the state that is concerned. If the **id** did not exist, an error is reported.
+- **states** is a sequence of zeros and ones indicating the observed states at  
+- **times** which are in seconds. The length of the fields **times** and **states** has to be the same.
+- **order** is the maximal model order to be evaluated. 
+
+####Outputs
+- **success** contains the best performing model order, -1 if the state **id** does not exist and -2 if **times** and **states** have different lengths.
+- **message** contains a detailed report or an error message.
+- **errors** is an array of prediction errors for model orders from 0 to **order**.
+
+###The 'delete' operation 
+Deletes a state with a given **id** from the state collection held in the server.
+
+####Inputs
+- **id** identification of the state that is concerned. If the **id** did not exist, an error is reported.
+
+####Outputs
+- **success** contains the number of states in the collection before the operation was performed. 
+- **message** contains a detailed report or an error message.
+
+###The 'update' operation 
+Reserved for future use when FreMEn is fused with Gaussian Mixture Models.
