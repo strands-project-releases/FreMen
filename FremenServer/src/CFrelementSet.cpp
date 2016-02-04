@@ -14,7 +14,7 @@ CFrelementSet::~CFrelementSet()
 	for (int i=0;i<numFrelements;i++) delete frelements[i];
 }
 
-int CFrelementSet::add(const char *name,uint32_t times[],unsigned char states[],int length)
+int CFrelementSet::add(const char *name,uint32_t times[],float states[],int length)
 {
 	bool exists = find(name);
 	if (exists == false){
@@ -46,6 +46,22 @@ int CFrelementSet::estimateEntropy(const char *name,uint32_t times[],float entro
 	return active->estimateEntropy(times,entropy,length,order);
 }
 
+int CFrelementSet::getModelParameters(const char *name,float  periods[],float amplitudes[],float phases[],int order)
+{
+	if (find(name) == false)return -1;
+	if (order > NUM_PERIODICITIES) order = NUM_PERIODICITIES;
+	phases[0] = 0;
+	periods[0] = +1.0/0.0;		//this corresponds to a maximum periodicity
+	amplitudes[0] = active->gain;	//because the first element is the 'static' probability
+	for (int i = 0;i<order;i++)
+	{
+		periods[i+1]=active->frelements[i].period;
+		amplitudes[i+1]=active->frelements[i].amplitude;
+		phases[i+1]=active->frelements[i].phase;
+	}
+	return order;
+}
+
 bool CFrelementSet::find(const char *name)
 {
 	int i = 0;
@@ -71,9 +87,9 @@ bool CFrelementSet::update(const char* name,int order)
 	return true;
 }
 
-bool CFrelementSet::print(int verbosityLevel)
+bool CFrelementSet::print(int order)
 {
-	for (int i = 0;i<numFrelements;i++) frelements[i]->print();
+	for (int i = 0;i<numFrelements;i++) frelements[i]->print(order);
 }
 
 bool CFrelementSet::load(FILE* file)

@@ -9,10 +9,8 @@ int fremenSort(const void* i,const void* j)
 	 return -1;
 }
 
-CFrelement::CFrelement(const char* name)
+CFrelement::CFrelement()
 {
-	strcpy(id,name);
-
 	//initialization of the frequency set
 	for (int i=0;i<NUM_PERIODICITIES;i++) frelements[i].amplitude = frelements[i].phase = 0; 
 	for (int i=0;i<NUM_PERIODICITIES;i++) frelements[i].period = (7*24*3600)/(i+1); 
@@ -99,25 +97,24 @@ int CFrelement::add(uint32_t times[],float states[],int length)
 
 	//sort the spectral components
 	qsort(frelements,NUM_PERIODICITIES,sizeof(SFrelement),fremenSort);
-
 	return numUpdated; 
 }
 
-int CFrelement::evaluate(uint32_t* times,unsigned char* signal,int length,int orderi,float* evals)
+int CFrelement::evaluate(uint32_t times[], float signal[],int length,int orderi,float evals[])
 {
 	float estimate = 0;
 	float time;
-	unsigned char state;
+	float state;
 	for (int j = 0;j<=orderi;j++) evals[j] = 0;
 	for (int j = 0;j<length;j++)
 	{
 		time = times[j];
 		state = signal[j];
 		estimate = gain;
-		evals[0]+= abs(state-(estimate>0.5));
+		evals[0]+= fabs(state-estimate);
 		for (int i = 0;i<orderi;i++){
 			 estimate+=2*frelements[i].amplitude*cos(time/frelements[i].period*2*M_PI-frelements[i].phase);
-			 evals[i+1]+= abs(state-(estimate>0.5));
+			 evals[i+1]+= fabs(state-estimate);
 		}
 	}
 	for (int j = 0;j<=orderi;j++)evals[j]=evals[j]/length;
@@ -145,7 +142,7 @@ void CFrelement::update(int modelOrder)
 void CFrelement::print(int orderi)
 {
 	int errs = 0;
-	std::cout << "Model: " << id << " Prior: " << gain << " Size: " << measurements << " ";
+	std::cout << " Prior: " << gain << " Size: " << measurements << " ";
 	if (orderi > 0) std::cout  << endl;
 	float ampl = gain;
 	for (int i = 0;i<orderi;i++){
