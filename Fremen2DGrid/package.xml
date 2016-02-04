@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package>
-  <name>frenap</name>
+  <name>fremen2dgrid</name>
   <version>0.2.0</version>
-  <description>FreNaP is a Frequency-based Navigation Prediction tool. It uses the Frequency Map Enhancement to find reoccuring patterns in navigation statistics gathered in topological maps. The FreNaP can be used to predict if a particular edge of a topological edge is going to be traversable at a given time and it also attemprs to estimate how long the traversal is going to take.</description>
+  <description>Fremen2dgrid is a tool for prediction of cells' occupancy of 2d grids based on non-uniform Fourier Transform. It uses the frequency spectrum analysis to identify reoccuring patterns in temporal sequences of binary states and represents the probability of these states in an analythical form as a combination of harmonic functions. This allows to learn long-term dynamics of the environment and use the learned experience to predict states of the world models used in mobile robotics. This ability is beneficial for tasks like self-localization, object search, path planning, anomaly detection and exploration.</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag --> 
   <!-- Example:  -->
@@ -37,17 +37,12 @@
   <!--   <test_depend>gtest</test_depend> -->
 
   <buildtool_depend>catkin</buildtool_depend>
-
   <build_depend>roscpp</build_depend>
   <build_depend>genmsg</build_depend>
   <build_depend>message_runtime</build_depend>
-  <build_depend>mongodb_store</build_depend>
-  <build_depend>strands_navigation_msgs</build_depend>
- 
   <run_depend>roscpp</run_depend>
-  <run_depend>genmsg</run_depend>
-  <run_depend>mongodb_store</run_depend>
   <run_depend>message_runtime</run_depend>
+  <run_depend>genmsg</run_depend>
 
   <build_depend>actionlib</build_depend>
   <build_depend>actionlib_msgs</build_depend>
