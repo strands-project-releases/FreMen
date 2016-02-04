@@ -7,11 +7,9 @@
 #include <math.h>
 #include <string.h>
 #include <stdint.h>
-#include "CTimer.h"
 
-#define MAX_ADAPTIVE_ORDER 4
-#define MAX_ID_LENGTH 100
-#define NUM_PERIODICITIES 100
+#define NUM_PERIODICITIES 24
+#define SATURATION 0.000
 #define FREMEN_AMPLITUDE_THRESHOLD 0.0
 	
 /**
@@ -22,18 +20,25 @@ typedef struct{
 	float imagStates;
 	float realBalance;
 	float imagBalance;
+}SSpectralComponent;
+
+typedef struct{
 	float amplitude;
 	float phase;
-	float period;	
+	float period;
 }SFrelement;
 
 using namespace std;
+extern float *periods;
 
 class CFrelement
 {
 	public:
-		CFrelement(const char* id);
+		CFrelement();
 		~CFrelement();
+
+		//this is called only when the state becomes dynamic
+		void initializeFrequencies();
 
 		//adds a serie of measurements to the data
 		int add(uint32_t times[],float states[],int length);
@@ -45,22 +50,26 @@ class CFrelement
 		int estimateEntropy(uint32_t times[],float entropy[],int length,int order);
 
 		//evaluates the error of the predictions for the given times and measurements
-		int evaluate(uint32_t* times,unsigned char* signal,int length,int orderi,float* evals);
-	
-		void update(int modelOrder);
+		int evaluate(uint32_t times[], float signal[],int length,int order,float evals[]);
+
+		/*prepares for predictions*/
+		int update(unsigned char modelOrder);
+
 		void print(int order);
 
 		int save(FILE* file,bool lossy = false);
 		int load(FILE* file);
 		int save(char* name,bool lossy = false);
 		int load(char* name);
-		
+
 		float gain;
-		char id[MAX_ID_LENGTH];
-		SFrelement frelements[NUM_PERIODICITIES];
+		SSpectralComponent *components;
+		SFrelement *frelements;
 		int measurements;
+		unsigned char order;
 		int64_t firstTime;
 		int64_t  lastTime;
+		float lastMeasurement;
 };
 
 #endif

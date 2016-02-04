@@ -7,10 +7,7 @@
 #include <math.h>
 #include <string.h>
 #include <stdint.h>
-#include "CTimer.h"
 
-#define MAX_ADAPTIVE_ORDER 4
-#define MAX_ID_LENGTH 100
 #define NUM_PERIODICITIES 100
 #define FREMEN_AMPLITUDE_THRESHOLD 0.0
 	
@@ -32,7 +29,7 @@ using namespace std;
 class CFrelement
 {
 	public:
-		CFrelement(const char* id);
+		CFrelement();
 		~CFrelement();
 
 		//adds a serie of measurements to the data
@@ -45,7 +42,7 @@ class CFrelement
 		int estimateEntropy(uint32_t times[],float entropy[],int length,int order);
 
 		//evaluates the error of the predictions for the given times and measurements
-		int evaluate(uint32_t* times,unsigned char* signal,int length,int orderi,float* evals);
+		int evaluate(uint32_t times[], float signal[],int length,int order,float evals[]);
 	
 		void update(int modelOrder);
 		void print(int order);
@@ -56,7 +53,6 @@ class CFrelement
 		int load(char* name);
 		
 		float gain;
-		char id[MAX_ID_LENGTH];
 		SFrelement frelements[NUM_PERIODICITIES];
 		int measurements;
 		int64_t firstTime;

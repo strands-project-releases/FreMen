@@ -37,6 +37,9 @@ void actionServerCallback(const fremenserver::FremenGoalConstPtr& goal, Server* 
 	}
 	if (debug) ROS_DEBUG("Command received %s %s\n",goal->operation.c_str(),goal->id.c_str());
 
+	result.probabilities.clear();
+	result.entropies.clear();
+	result.errors.clear();
 	/*perform model update (if needed)*/
 	if (goal->operation == "update")
 	{
@@ -53,7 +56,11 @@ void actionServerCallback(const fremenserver::FremenGoalConstPtr& goal, Server* 
 	else if (goal->operation == "add")
 	{
 		if (goal->times.size() == goal->states.size()){
-			result.success = frelements.add(goal->id.c_str(),(uint32_t*)goal->times.data(),(unsigned char*)goal->states.data(),(int)goal->states.size());
+			float values[goal->states.size()];
+			for (int i=0;i<goal->states.size();i++){
+				if (goal->states[i]) values[i] = 1; else values[i] = 0;
+			}
+			result.success = frelements.add(goal->id.c_str(),(uint32_t*)goal->times.data(),values,(int)goal->states.size());
 			if (result.success >=0)
 			{
 				mess << "Added " << result.success << " of the " << (int)goal->states.size() << " provided measurements to the state " << goal->id;
@@ -69,7 +76,27 @@ void actionServerCallback(const fremenserver::FremenGoalConstPtr& goal, Server* 
 			result.success = -2;
 			server->setAborted(result);
 		}
-	}	
+	}
+	else if (goal->operation == "addvalues")
+	{
+		if (goal->times.size() == goal->values.size()){
+			result.success = frelements.add(goal->id.c_str(),(uint32_t*)goal->times.data(),(float*)goal->values.data(),(int)goal->states.size());
+			if (result.success >=0)
+			{
+				mess << "Added " << result.success << " of the " << (int)goal->states.size() << " provided measurements to the state " << goal->id;
+				result.message = mess.str(); 
+			}else{
+				mess << "A new state " <<  goal->id << " was added to the collection and filled with "  << (int)goal->states.size() << " measurements.";
+				result.message = mess.str(); 
+			}
+			server->setSucceeded(result);
+		}else{
+			mess << "The length of the 'values' and 'times' arrays does not match.";
+			result.message = mess.str(); 
+			result.success = -2;
+			server->setAborted(result);
+		}
+	}
 	else if (goal->operation == "evaluate")
 	{
 		if (goal->times.size() == goal->states.size()){
@@ -131,6 +158,7 @@ void actionServerCallback(const fremenserver::FremenGoalConstPtr& goal, Server* 
 		{
 			mess << "Predicted the probabilities of " << (int)goal->ids.size() << " states ";
 			result.probabilities.assign(probabilities,probabilities + (int)goal->ids.size());
+			result.entropies.clear();
 			result.message = mess.str();
 			server->setSucceeded(result);
 		}else{
@@ -155,6 +183,38 @@ void actionServerCallback(const fremenserver::FremenGoalConstPtr& goal, Server* 
 			server->setAborted(result);
 		}
 	}
+	else if (goal->operation == "forecastEntropy")
+	{
+		float probabilities[goal->ids.size()];
+		float probs[1];
+		int32_t order = goal->order; 
+		result.success = -1;
+		if (goal->times.size() == 1){
+			result.success = 0; 
+			for (int i=0;i<goal->ids.size();i++)
+			{
+				if (goal->ids.size()==goal->orders.size()) order = goal->orders[i]; 
+				if (frelements.estimateEntropy(goal->ids[i].c_str(),(uint32_t*)goal->times.data(),probs,1,order)==1){
+					probabilities[i] = probs[0];
+					result.success++;
+				}else{
+					probabilities[i] = -1;
+				}				
+			}
+		}
+		if (result.success >=0)
+		{
+			mess << "Predicted the entropies of " << (int)goal->ids.size() << " states ";
+			result.entropies.assign(probabilities,probabilities + (int)goal->ids.size());
+			result.probabilities.clear();
+			result.message = mess.str();
+			server->setSucceeded(result);
+		}else{
+			mess << "The forecast service failed - the ''times'' argument did not have length equal to 1.";
+			result.message = mess.str();
+			server->setAborted(result);
+		}
+	}
 	else if (goal->operation == "remove")
 	{
 		result.success = frelements.remove(goal->id.c_str());
@@ -169,7 +229,33 @@ void actionServerCallback(const fremenserver::FremenGoalConstPtr& goal, Server* 
 			server->setAborted(result);
 		}
 	}
-	else if (goal->operation == "debug")
+	else if (goal->operation == "view")
+	{
+		if (goal->order < NUM_PERIODICITIES){
+			float amplitudes[goal->order+1];
+			float periods[goal->order+1];
+			float phases[goal->order+1];
+			result.success = frelements.getModelParameters(goal->id.c_str(),periods,amplitudes,phases,goal->order);
+			if (result.success == goal->order)
+			{
+				mess << "Returning " << goal->order << " FreMen model parameters of "  << goal->id << ". The probabilities field contains frequencies, the entropies field contains phase amplitudes and the errors field contains phase shifts. Infinite period corresponds to static probability.";
+				result.probabilities.assign(periods,periods + (int)(goal->order+1));
+				result.entropies.assign(amplitudes,amplitudes + (int)(goal->order+1));
+				result.errors.assign(phases,phases + (int)(goal->order+1));
+
+				result.message = mess.str();
+				server->setSucceeded(result);
+			}else{
+				mess << "State ID " << goal->id << " does not exist.";
+				result.message = mess.str();
+				server->setAborted(result);
+			}
+		}else{
+			mess << "The maximal fremen order is " << NUM_PERIODICITIES << ". You can't ask for more.";
+			result.success = -1;
+			server->setAborted(result);
+		}
+	}else if (goal->operation == "debug")
 	{
 		result.success = true;	
 		result.message = "Debug printed";
@@ -187,7 +273,7 @@ int test()
 {
 	CFrelementSet frelements;
 	uint32_t 	times[100000];
-	unsigned char 	state[100000];
+	float 		state[100000];
 	float 		probsA[100000];
 	float 		probsB[100000];
 	int len = 7*24*60;
@@ -212,7 +298,7 @@ int test()
 	frelements.print(true);
 	file = fopen("output.txt","w");
 	
-	for (int i = 0;i<len;i++)fprintf(file,"%i %.3f %.3f\n",state[i],probsA[i],probsB[i]);
+	for (int i = 0;i<len;i++)fprintf(file,"%.3f %.3f %.3f\n",state[i],probsA[i],probsB[i]);
 	fclose(file);
 }
 

@@ -4,12 +4,8 @@ Changelog for package frenap
 
 0.2.0 (2016-02-04)
 ------------------
-* Checking length of the correct arrays
-* Extended by adding an 'addvalue' action, which accepts floating points at input. I recommend to normalize the floats to [0-1].
-* Redundand variable 'order' removed from CFrelement
-* View action
-* forecastEntropy action
-* forecastEntropy action
+* Added estimate entropy action
+* FremenArray: FreMEn for 2D grids.
 * Contributors: Tom Krajnik
 
 0.1.3 (2015-04-08)
