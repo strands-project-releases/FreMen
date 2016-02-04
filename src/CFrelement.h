@@ -12,7 +12,7 @@
 #define MAX_ADAPTIVE_ORDER 4
 #define MAX_ID_LENGTH 100
 #define NUM_PERIODICITIES 100
-#define FREMEN_AMPLITUDE_THRESHOLD 0.1
+#define FREMEN_AMPLITUDE_THRESHOLD 0.0
 	
 /**
 @author Tom Krajnik
@@ -36,7 +36,7 @@ class CFrelement
 		~CFrelement();
 
 		//adds a serie of measurements to the data
-		int add(uint32_t times[],unsigned char states[],int length);
+		int add(uint32_t times[],float states[],int length);
 
 		//estimates the probability for the given times 
 		int estimate(uint32_t times[],float probs[],int length,int order);
@@ -48,7 +48,7 @@ class CFrelement
 		int evaluate(uint32_t* times,unsigned char* signal,int length,int orderi,float* evals);
 	
 		void update(int modelOrder);
-		void print(bool verbose=true);
+		void print(int order);
 
 		int save(FILE* file,bool lossy = false);
 		int load(FILE* file);
@@ -58,7 +58,7 @@ class CFrelement
 		float gain;
 		char id[MAX_ID_LENGTH];
 		SFrelement frelements[NUM_PERIODICITIES];
-		int measurements,order;
+		int measurements;
 		int64_t firstTime;
 		int64_t  lastTime;
 };
