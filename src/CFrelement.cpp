@@ -16,8 +16,7 @@ CFrelement::CFrelement(const char* name)
 	//initialization of the frequency set
 	for (int i=0;i<NUM_PERIODICITIES;i++) frelements[i].amplitude = frelements[i].phase = 0; 
 	for (int i=0;i<NUM_PERIODICITIES;i++) frelements[i].period = (7*24*3600)/(i+1); 
-	gain = 0;
-	order = 0;
+	gain = 0.5;
 	firstTime = -1;
 	lastTime = -1;
 	measurements = 0;
@@ -28,7 +27,7 @@ CFrelement::~CFrelement()
 }
 
 // adds new state observations at given times
-int CFrelement::add(uint32_t times[],unsigned char states[],int length)
+int CFrelement::add(uint32_t times[],float states[],int length)
 {
 	if (measurements == 0 && length > 0)
 	{
@@ -121,7 +120,7 @@ int CFrelement::evaluate(uint32_t* times,unsigned char* signal,int length,int or
 			 evals[i+1]+= abs(state-(estimate>0.5));
 		}
 	}
-	for (int j = 0;j<=order+1;j++) evals[j]=evals[j]/length;
+	for (int j = 0;j<=orderi;j++)evals[j]=evals[j]/length;
 
 	//get best model order
 	float error = 10.0;
@@ -143,16 +142,14 @@ void CFrelement::update(int modelOrder)
 }
 
 /*text representation of the fremen model*/
-void CFrelement::print(bool verbose)
+void CFrelement::print(int orderi)
 {
 	int errs = 0;
 	std::cout << "Model: " << id << " Prior: " << gain << " Size: " << measurements << " ";
-	if (order > 0) std::cout  << endl;
-	if (verbose){
-		float ampl = gain;
-		for (int i = 0;i<order;i++){
-			std::cout << "Frelement " << i << " " << frelements[i].amplitude << " " << frelements[i].phase << " " << frelements[i].period << endl;
-		}
+	if (orderi > 0) std::cout  << endl;
+	float ampl = gain;
+	for (int i = 0;i<orderi;i++){
+		std::cout << "Frelement " << i << " " << frelements[i].amplitude << " " << frelements[i].phase << " " << frelements[i].period << endl;
 	}
 	std::cout << endl; 
 }
