@@ -1,5 +1,7 @@
 #include <stdlib.h>
 #include "ros/ros.h"
+#include "std_msgs/Bool.h"
+
 #include "CFrelementSet.h"
 #include <actionlib/server/simple_action_server.h>
 #include <fremenserver/FremenAction.h>
@@ -80,13 +82,13 @@ void actionServerCallback(const fremenserver::FremenGoalConstPtr& goal, Server* 
 	else if (goal->operation == "addvalues")
 	{
 		if (goal->times.size() == goal->values.size()){
-			result.success = frelements.add(goal->id.c_str(),(uint32_t*)goal->times.data(),(float*)goal->values.data(),(int)goal->states.size());
+			result.success = frelements.add(goal->id.c_str(),(uint32_t*)goal->times.data(),(float*)goal->values.data(),(int)goal->values.size());
 			if (result.success >=0)
 			{
-				mess << "Added " << result.success << " of the " << (int)goal->states.size() << " provided measurements to the state " << goal->id;
+				mess << "Added " << result.success << " of the " << (int)goal->values.size() << " provided measurements to the state " << goal->id;
 				result.message = mess.str(); 
 			}else{
-				mess << "A new state " <<  goal->id << " was added to the collection and filled with "  << (int)goal->states.size() << " measurements.";
+				mess << "A new state " <<  goal->id << " was added to the collection and filled with "  << (int)goal->values.size() << " measurements.";
 				result.message = mess.str(); 
 			}
 			server->setSucceeded(result);
@@ -311,9 +313,15 @@ int main(int argc,char* argv[])
 	server = new Server(*n, "/fremenserver", boost::bind(&actionServerCallback, _1, server), false);
 	server->start();
 
+	ros::Publisher starter_pub = n->advertise<std_msgs::Bool>("/fremenserver_start", 1, true);
+	std_msgs::Bool msg;
+	msg.data=true;
+	starter_pub.publish(msg);
+
 	while (ros::ok()){
 		ros::spinOnce();
 		usleep(30000);
 	}
+
 	return 0;
 }
