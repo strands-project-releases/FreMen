@@ -1,3 +1,32 @@
+## fremen (indigo) - 0.2.2-0
+
+The packages in the `fremen` repository were released into the `indigo` distro by running `/usr/bin/bloom-release --non-interactive -t indigo -r indigo fremen` on `Thu, 03 Nov 2016 08:52:11 -0000`
+
+These packages were released:
+- `fremen2dgrid`
+- `fremenarray`
+- `fremengrid`
+- `fremenserver`
+- `frenap`
+- `froctomap`
+- `frongo`
+- `frongoweb`
+
+Version of package(s) in repository `fremen`:
+- upstream repository: https://github.com/strands-project/fremen.git
+- release repository: https://github.com/strands-project-releases/fremen.git
+- rosdistro version: `0.2.1-0`
+- old version: `0.2.1-0`
+- new version: `0.2.2-0`
+
+Versions of tools used:
+- bloom version: `0.5.20`
+- catkin_pkg version: `0.2.10`
+- rosdep version: `0.11.2`
+- rosdistro version: `0.4.2`
+- vcstools version: `0.1.37`
+
+
 ## fremen (indigo) - 0.2.1-0
 
 The packages in the `fremen` repository were released into the `indigo` distro by running `/usr/bin/bloom-release --non-interactive -t indigo -r indigo fremen` on `Wed, 17 Feb 2016 14:57:54 -0000`
