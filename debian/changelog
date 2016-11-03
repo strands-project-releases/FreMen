@@ -1,0 +1,106 @@
+ros-indigo-frongoweb (0.2.2-0trusty) trusty; urgency=high
+
+  * Frongoweb improvements (#35 <https://github.com/strands-project/fremen/issues/35>)
+    * added first parameter handling
+    * encodes current query in URL to save as bookmarks
+    * prepared to display states, but not sure yet ow to best display them
+    * intermediate
+    * added test yaml file
+    * moving to new Chart.js
+    * at least working again
+    * model_info working again
+  * Frongoweb (#34 <https://github.com/strands-project/fremen/issues/34>)
+    Creation of the web frontend for Frongo.
+    * initial
+    * first base working thing
+    * updated with first charts
+    * moved
+    * * changed author and license in frongo package
+    * turned frongoweb into a package
+    * added pyc to gitignore
+    * datepicker added
+    * fixed datepicker and handling of epoch to date strings and vice versa
+    * event handlers for change
+    * ranges and epochs handled fully correctly now
+    * minor cosmetic changes
+    * added install targets
+    * first working version
+  * Contributors: Marc Hanheide
+  * Frongoweb improvements (#35 <https://github.com/strands-project/fremen/issues/35>)
+    * added first parameter handling
+    * encodes current query in URL to save as bookmarks
+    * prepared to display states, but not sure yet ow to best display them
+    * intermediate
+    * added test yaml file
+    * moving to new Chart.js
+    * at least working again
+    * model_info working again
+  * Frongoweb (#34 <https://github.com/strands-project/fremen/issues/34>)
+    Creation of the web frontend for Frongo.
+    * initial
+    * first base working thing
+    * updated with first charts
+    * moved
+    * * changed author and license in frongo package
+    * turned frongoweb into a package
+    * added pyc to gitignore
+    * datepicker added
+    * fixed datepicker and handling of epoch to date strings and vice versa
+    * event handlers for change
+    * ranges and epochs handled fully correctly now
+    * minor cosmetic changes
+    * added install targets
+    * first working version
+  * Contributors: Marc Hanheide
+
+ -- Marc Hanheide <marc@hanheide.net>  Thu, 03 Nov 2016 00:00:00 -0000
+
+ros-indigo-frongoweb (0.2.1-0trusty) trusty; urgency=high
+
+
+
+ -- Marc Hanheide <marc@hanheide.net>  Wed, 17 Feb 2016 00:00:00 -0000
+
+ros-indigo-frongoweb (0.2.0-0trusty) trusty; urgency=high
+
+
+
+ -- Marc Hanheide <marc@hanheide.net>  Thu, 04 Feb 2016 00:00:00 -0000
+
+ros-indigo-frongoweb (0.1.3-0trusty) trusty; urgency=high
+
+
+
+ -- Marc Hanheide <marc@hanheide.net>  Wed, 08 Apr 2015 00:00:00 -0000
+
+ros-indigo-frongoweb (0.1.2-0trusty) trusty; urgency=high
+
+
+
+ -- Marc Hanheide <marc@hanheide.net>  Mon, 30 Mar 2015 00:00:00 -0000
+
+ros-indigo-frongoweb (0.1.1-0trusty) trusty; urgency=high
+
+
+
+ -- Marc Hanheide <marc@hanheide.net>  Wed, 04 Mar 2015 00:00:00 -0000
+
+ros-indigo-frongoweb (0.1.0-0trusty) trusty; urgency=high
+
+
+
+ -- Marc Hanheide <marc@hanheide.net>  Sat, 08 Nov 2014 00:00:00 -0000
+
+ros-indigo-frongoweb (0.0.3-0trusty) trusty; urgency=high
+
+
+
+ -- Marc Hanheide <marc@hanheide.net>  Thu, 06 Nov 2014 19:43:00 -0000
+
+ros-indigo-frongoweb (0.0.1-0trusty) trusty; urgency=high
+
+
+
+ -- Marc Hanheide <marc@hanheide.net>  Thu, 06 Nov 2014 04:16:00 -0000
+
+
