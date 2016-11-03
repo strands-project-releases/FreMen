@@ -1,0 +1,12 @@
+Source: ros-indigo-frongoweb
+Section: misc
+Priority: extra
+Maintainer: Marc Hanheide <marc@hanheide.net>
+Build-Depends: debhelper (>= 9.0.0), python-webpy, ros-indigo-catkin, ros-indigo-frongo, ros-indigo-rospy
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-indigo-frongoweb
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, python-webpy, ros-indigo-frongo, ros-indigo-rospy
+Description: The frongoweb package
