@@ -1,3 +1,33 @@
+## fremen (kinetic) - 0.3.1-0
+
+The packages in the `fremen` repository were released into the `kinetic` distro by running `/usr/bin/bloom-release -n -t kinetic -r kinetic fremen` on `Wed, 28 Jun 2017 22:53:22 -0000`
+
+These packages were released:
+- `fremen2dgrid`
+- `fremenarray`
+- `fremengrid`
+- `fremenserver`
+- `froctomap`
+- `frongo`
+- `frongoweb`
+
+Version of package(s) in repository `fremen`:
+
+- upstream repository: https://github.com/strands-project/fremen.git
+- release repository: unknown
+- rosdistro version: `null`
+- old version: `null`
+- new version: `0.3.1-0`
+
+Versions of tools used:
+
+- bloom version: `0.5.26`
+- catkin_pkg version: `0.3.5`
+- rosdep version: `0.11.5`
+- rosdistro version: `0.6.2`
+- vcstools version: `0.1.39`
+
+
 ## fremen (indigo) - 0.3.0-0
 
 The packages in the `fremen` repository were released into the `indigo` distro by running `/usr/bin/bloom-release --non-interactive -t indigo -r indigo fremen` on `Thu, 03 Nov 2016 16:51:44 -0000`
