@@ -1,0 +1,12 @@
+Source: ros-kinetic-frongo
+Section: misc
+Priority: extra
+Maintainer: Jaime Pulido Fentanes <JPulidoFentanes@lincoln.ac.uk>
+Build-Depends: debhelper (>= 9.0.0), libmongo-client-dev, mongodb, ros-kinetic-catkin, ros-kinetic-fremenserver, ros-kinetic-mongodb-store
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-kinetic-frongo
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libmongo-client-dev, mongodb, ros-kinetic-fremenserver, ros-kinetic-mongodb-store
+Description: The frongo package
