@@ -1,0 +1,12 @@
+Source: ros-kinetic-frongoweb
+Section: misc
+Priority: extra
+Maintainer: Marc Hanheide <marc@hanheide.net>
+Build-Depends: debhelper (>= 9.0.0), python-webpy, ros-kinetic-catkin, ros-kinetic-frongo, ros-kinetic-rospy
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-kinetic-frongoweb
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, python-webpy, ros-kinetic-frongo, ros-kinetic-rospy
+Description: The frongoweb package
