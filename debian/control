@@ -1,0 +1,13 @@
+Source: ros-kinetic-froctomap
+Section: misc
+Priority: extra
+Maintainer: Tom Krajnik <tkrajnik@lincoln.ac.uk>
+Build-Depends: debhelper (>= 9.0.0), libfftw3-3, libfftw3-dev, libpcl-dev, ros-kinetic-actionlib, ros-kinetic-actionlib-msgs, ros-kinetic-catkin, ros-kinetic-genmsg, ros-kinetic-message-generation, ros-kinetic-message-runtime, ros-kinetic-octomap, ros-kinetic-octomap-server, ros-kinetic-pcl-conversions, ros-kinetic-pcl-ros, ros-kinetic-roscpp, ros-kinetic-rospy, ros-kinetic-sensor-msgs, ros-kinetic-std-msgs, ros-kinetic-visualization-msgs
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-kinetic-froctomap
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libfftw3-3, libfftw3-dev, libpcl1.7, ros-kinetic-actionlib, ros-kinetic-actionlib-msgs, ros-kinetic-genmsg, ros-kinetic-message-runtime, ros-kinetic-octomap, ros-kinetic-octomap-server, ros-kinetic-pcl-conversions, ros-kinetic-pcl-ros, ros-kinetic-roscpp, ros-kinetic-rospy, ros-kinetic-sensor-msgs, ros-kinetic-std-msgs, ros-kinetic-visualization-msgs
+Description: The FrOctoMap (Frequency Enhanced OctoMap) method allows for efficient volumetric representation of dynamic three-dimensional environments over long periods of time.
+ It is based on combination of a well-established 3D mapping framework called Octomaps and an idea to model environment dynamics by its frequency spectrum (FreMeN) [3]. The proposed method allows not only for efficient representation, but also reliable prediction of the future states of dynamic three-dimensional environments.
