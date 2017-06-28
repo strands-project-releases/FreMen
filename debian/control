@@ -1,0 +1,12 @@
+Source: ros-kinetic-fremengrid
+Section: misc
+Priority: extra
+Maintainer: Tom Krajnik <tkrajnik@lincoln.ac.uk>
+Build-Depends: debhelper (>= 9.0.0), ros-kinetic-actionlib, ros-kinetic-actionlib-msgs, ros-kinetic-catkin, ros-kinetic-genmsg, ros-kinetic-image-transport, ros-kinetic-message-generation, ros-kinetic-message-runtime, ros-kinetic-move-base-msgs, ros-kinetic-roscpp, ros-kinetic-rospy, ros-kinetic-sensor-msgs, ros-kinetic-std-msgs, ros-kinetic-tf, ros-kinetic-visualization-msgs
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-kinetic-fremengrid
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-kinetic-actionlib, ros-kinetic-actionlib-msgs, ros-kinetic-genmsg, ros-kinetic-image-transport, ros-kinetic-message-runtime, ros-kinetic-move-base-msgs, ros-kinetic-roscpp, ros-kinetic-rospy, ros-kinetic-sensor-msgs, ros-kinetic-std-msgs, ros-kinetic-tf, ros-kinetic-visualization-msgs
+Description: Frequency Map Enhanced 3D occupancy grid - non uniform Fourier transform version
