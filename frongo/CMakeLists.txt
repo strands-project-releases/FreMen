@@ -13,6 +13,7 @@ add_service_files(
   FILES
   AddModel.srv
   BuildModel.srv
+  DetectAnomalies.srv
   GraphModel.srv
   GetInfo.srv
   PredictState.srv

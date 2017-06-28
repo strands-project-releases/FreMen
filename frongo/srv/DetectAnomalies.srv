@@ -1,0 +1,6 @@
+string model_name
+int32    order
+float64 confidence
+---
+uint32[] epochs
+float64[] values

@@ -12,10 +12,11 @@ def get_field(item, key):
 
 class TModels(object):
 
-    def __init__(self, name, data_field='data', data_type='boolean', data_conf='', 
-                 timestamp_field='_meta.inserted_at', timestamp_type='datetime',
-                 query='{}', db='message_store', collection='message_store'):
+    def __init__(self, name, data_field='data', model_type='standard', 
+                 data_type='boolean', data_conf='', timestamp_field='_meta.inserted_at',
+                 timestamp_type='datetime', query='{}', db='message_store', collection='message_store'):
         self.name=name
+        self.model_type=model_type
         self.db=db
         self.collection=collection
         self.query=query
@@ -25,13 +26,19 @@ class TModels(object):
         self.timestamp_field = timestamp_field
         self.timestamp_type = timestamp_type
         self.order = -1
+
         self.epochs=[]
         self.states=[]
+        self.anomalyTimes=[]
+        self.anomalyValues=[]
+
         self._set_data_configuration()
         self._fremen = fremen_interface()
+
         if self.data_type == 'boolean':
             self.min_value=False
             self.max_value=True
+        self.unknown=True
 
     def _set_props_from_dict(self, data):
         for i in data.keys():
@@ -40,13 +47,21 @@ class TModels(object):
 
         self._set_data_configuration()
 
+
     def _set_data_configuration(self):
         if self.data_conf != '':
             self._dconf=json.loads(self.data_conf)
         else:
             self._dconf=self.data_conf
 
-    def _add_entry(self, entry):     
+    def _add_state(self, epoch, state):
+        self.unknown=False
+        self.states.append(state)
+        self.epochs.append(epoch)
+        
+
+    def _add_entry(self, entry):
+        self.unknown=False
         if self.timestamp_type == 'datetime':
             epoch = int(get_field(entry, self.timestamp_field).strftime('%s'))
         else:
@@ -121,23 +136,47 @@ class TModels(object):
         return state
         
     def _create_fremen_models(self):
-        self.order = self._fremen.create_fremen_model(self.name, self.epochs, self.states, self.data_type)
+        if not self.unknown:
+            self.order = self._fremen.create_fremen_model(self.name, self.epochs, self.states, self.data_type)
+        else:
+            self.order = 0
+
+    def _detect_anomalies(self, order, confidence):
+        if not self.unknown:
+            self.anomalyTimes, self.anomalyValues = self._fremen.detect_anomalies(self.name, self.epochs, self.states, order, confidence)
+        return self.anomalyTimes, self.anomalyValues
+        
 
 
     def _predict_outcome(self, epochs, order=-1):
-        if order < 0:
-            order= self.order
-        probs=self._fremen.predict_outcome(epochs, self.name, order)
-        return probs
-    
+        if not self.unknown:
+            if order < 0:
+                order= self.order
+            probs=self._fremen.predict_outcome(epochs, self.name, order)
+            return probs
+        else:
+            probs=[]
+            for i in epochs:
+                probs.append(0.5)
+            return probs
+
     
     def _predict_entropy(self, epochs, order=-1):
-        if order < 0:
-            order= self.order
-        probs=self._fremen.predict_entropy(epochs, self.name, order)
-        print probs
-        return probs
+        if not self.unknown:
+            if order < 0:
+                order= self.order
+            probs=self._fremen.predict_entropy(epochs, self.name, order)
+            print probs
+            return probs
+        else:
+            probs=[]
+            for i in epochs:
+                probs.append(0.5)
+            return probs
 
+
+    def _set_unknown(self, status):
+        self.unknown=status
 
     def _get_states(self, epochs):
         ret_epochs=[]
@@ -170,9 +209,14 @@ class TModels(object):
             if type(self.__getattribute__(i)) is not list:
                 s[str(i)] =  self.__getattribute__(i)
             else:
-                st= '[list with ' + str(len(self.__getattribute__(i))) +' ' + str(type(self.__getattribute__(i)[0])) + ' elements]'
-                s[str(i)] = st
-        
+                if not self.unknown:
+                    if len(self.__getattribute__(i)) > 0:
+                        st= '[list with ' + str(len(self.__getattribute__(i))) +' ' + str(type(self.__getattribute__(i)[0])) + ' elements]'
+                    else:
+                        st= '[list with 0 elements]'
+
+                    s[str(i)] = st
+                           
         out=yaml.safe_dump(s,default_flow_style=False)
         return out
 
@@ -198,7 +242,9 @@ class TModels(object):
             if type(self.__getattribute__(i)) is not list:
                 s = s + str(i) +': ' + str(self.__getattribute__(i)) + '\n'
             else:
-                s = s + str(i) +': [list with ' + str(len(self.__getattribute__(i))) +' ' + str(type(self.__getattribute__(i)[0])) + ' elements]\n'
-
+                if len(self.__getattribute__(i)) > 0:
+                    s = s + str(i) +': [list with ' + str(len(self.__getattribute__(i))) +' ' + str(type(self.__getattribute__(i)[0])) + ' elements]\n'
+                else:
+                    s = s + str(i) +': [list with ' + str(len(self.__getattribute__(i))) +' ' + str(0) + ' elements]\n'
         return s
         
