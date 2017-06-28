@@ -1,0 +1,13 @@
+Source: ros-kinetic-fremenarray
+Section: misc
+Priority: extra
+Maintainer: Tom Krajnik <tkrajnik@lincoln.ac.uk>
+Build-Depends: debhelper (>= 9.0.0), ros-kinetic-actionlib, ros-kinetic-actionlib-msgs, ros-kinetic-catkin, ros-kinetic-genmsg, ros-kinetic-message-runtime, ros-kinetic-roscpp
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-kinetic-fremenarray
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-kinetic-actionlib, ros-kinetic-actionlib-msgs, ros-kinetic-genmsg, ros-kinetic-message-runtime, ros-kinetic-roscpp
+Description: FremenArray is a tool for prediction of large arrays of binary states based on non-uniform Fourier Transform.
+ It uses the frequency spectrum analysis to identify reoccuring patterns in temporal sequences of binary states and represents the probability of these states in an analythical form as a combination of harmonic functions. This allows to learn long-term dynamics of the environment and use the learned experience to predict states of the world models used in mobile robotics. This ability is beneficial for tasks like self-localization, object search, path planning, anomaly detection and exploration.
