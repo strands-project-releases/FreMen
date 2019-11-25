@@ -1,0 +1,214 @@
+ros-melodic-frongo (0.3.1-1bionic) bionic; urgency=high
+
+  * Event modelling (#45 <https://github.com/strands-project/fremen/issues/45>)
+    * fingers crossed this is a hail mary
+    * fixing stupid error
+    * handling empty lists
+    * Adding event modelling to frongo
+    * Update README.md
+    adding todos to readme
+    * removing prints
+    * adding order to anomaly detection and fixing spelling
+  * Frongo Web Improvements for Anomalies and Anomalies fixed in frongo (#43 <https://github.com/strands-project/fremen/issues/43>)
+    * fingers crossed this is a hail mary (was #42 <https://github.com/strands-project/fremen/issues/42>)
+    * fixing stupid error
+    * handling empty lists
+    * first version with anomalies
+    * ok, kind of working now
+  * Now Frongo manages models with empty queries and adding /rebuild_all_models service. (#38 <https://github.com/strands-project/fremen/issues/38>)
+  * Contributors: Jaime Pulido Fentanes, Marc Hanheide
+
+ -- Jaime Pulido Fentanes <JPulidoFentanes@lincoln.ac.uk>  Tue, 27 Jun 2017 23:00:00 -0000
+
+ros-melodic-frongo (0.3.0-1bionic) bionic; urgency=high
+
+
+
+ -- Jaime Pulido Fentanes <JPulidoFentanes@lincoln.ac.uk>  Thu, 03 Nov 2016 00:00:00 -0000
+
+ros-melodic-frongo (0.2.2-1bionic) bionic; urgency=high
+
+  * Last changes before FreMen Demo (#36 <https://github.com/strands-project/fremen/issues/36>)
+    * last changes before FreMen Demo
+  * Frongoweb (#34 <https://github.com/strands-project/fremen/issues/34>)
+    Creation of the web frontend for Frongo.
+    * initial
+    * first base working thing
+    * updated with first charts
+    * moved
+    * * changed author and license in frongo package
+    * turned frongoweb into a package
+    * added pyc to gitignore
+    * datepicker added
+    * fixed datepicker and handling of epoch to date strings and vice versa
+    * event handlers for change
+    * ranges and epochs handled fully correctly now
+    * minor cosmetic changes
+    * added install targets
+    * first working version
+  * Adding Updated README (#33 <https://github.com/strands-project/fremen/issues/33>)
+    * returning epoch in request prediction service
+    * Create README.md
+    * Now fremeniser can start without yaml file, yaml defs can be loaded through the service /frongo/add_model_defs /frongo/add_model_defs and script for testing this is added
+    * Update README.md
+    * Update README.md
+    * Adding predict state order service
+    * [Frongo] Now you can configure linear normalisation for float type models
+    * Update README.md
+    * Adding get_info service and test launch file
+    * Adding services for entropy estimation
+    * _get_info method was repeated for some weird reason
+    * adding /frongo/get_states service
+    * Update README.md
+  * Adding services for entropy estimation (#32 <https://github.com/strands-project/fremen/issues/32>)
+    * returning epoch in request prediction service
+    * Create README.md
+    * Now fremeniser can start without yaml file, yaml defs can be loaded through the service /frongo/add_model_defs /frongo/add_model_defs and script for testing this is added
+    * Update README.md
+    * Update README.md
+    * Adding predict state order service
+    * [Frongo] Now you can configure linear normalisation for float type models
+    * Update README.md
+    * Adding get_info service and test launch file
+    * Adding services for entropy estimation
+    * _get_info method was repeated for some weird reason
+    * adding /frongo/get_states service
+  * Adding get_info service and test launch file (#31 <https://github.com/strands-project/fremen/issues/31>)
+    * returning epoch in request prediction service
+    * Create README.md
+    * Now fremeniser can start without yaml file, yaml defs can be loaded through the service /frongo/add_model_defs /frongo/add_model_defs and script for testing this is added
+    * Update README.md
+    * Update README.md
+    * Adding predict state order service
+    * [Frongo] Now you can configure linear normalisation for float type models
+    * Update README.md
+    * Adding get_info service and test launch file
+  * returning epoch in request prediction service (#30 <https://github.com/strands-project/fremen/issues/30>)
+    * returning epoch in request prediction service
+    * Create README.md
+    * Now fremeniser can start without yaml file, yaml defs can be loaded through the service /frongo/add_model_defs /frongo/add_model_defs and script for testing this is added
+    * Update README.md
+    * Update README.md
+    * Adding predict state order service
+    * [Frongo] Now you can configure linear normalisation for float type models
+    * Update README.md
+  * Adding First Functional Version of Frongo (#29 <https://github.com/strands-project/fremen/issues/29>)
+  * Contributors: Jaime Pulido Fentanes, Marc Hanheide
+  * Last changes before FreMen Demo (#36 <https://github.com/strands-project/fremen/issues/36>)
+    * last changes before FreMen Demo
+  * Frongoweb (#34 <https://github.com/strands-project/fremen/issues/34>)
+    Creation of the web frontend for Frongo.
+    * initial
+    * first base working thing
+    * updated with first charts
+    * moved
+    * * changed author and license in frongo package
+    * turned frongoweb into a package
+    * added pyc to gitignore
+    * datepicker added
+    * fixed datepicker and handling of epoch to date strings and vice versa
+    * event handlers for change
+    * ranges and epochs handled fully correctly now
+    * minor cosmetic changes
+    * added install targets
+    * first working version
+  * Adding Updated README (#33 <https://github.com/strands-project/fremen/issues/33>)
+    * returning epoch in request prediction service
+    * Create README.md
+    * Now fremeniser can start without yaml file, yaml defs can be loaded through the service /frongo/add_model_defs /frongo/add_model_defs and script for testing this is added
+    * Update README.md
+    * Update README.md
+    * Adding predict state order service
+    * [Frongo] Now you can configure linear normalisation for float type models
+    * Update README.md
+    * Adding get_info service and test launch file
+    * Adding services for entropy estimation
+    * _get_info method was repeated for some weird reason
+    * adding /frongo/get_states service
+    * Update README.md
+  * Adding services for entropy estimation (#32 <https://github.com/strands-project/fremen/issues/32>)
+    * returning epoch in request prediction service
+    * Create README.md
+    * Now fremeniser can start without yaml file, yaml defs can be loaded through the service /frongo/add_model_defs /frongo/add_model_defs and script for testing this is added
+    * Update README.md
+    * Update README.md
+    * Adding predict state order service
+    * [Frongo] Now you can configure linear normalisation for float type models
+    * Update README.md
+    * Adding get_info service and test launch file
+    * Adding services for entropy estimation
+    * _get_info method was repeated for some weird reason
+    * adding /frongo/get_states service
+  * Adding get_info service and test launch file (#31 <https://github.com/strands-project/fremen/issues/31>)
+    * returning epoch in request prediction service
+    * Create README.md
+    * Now fremeniser can start without yaml file, yaml defs can be loaded through the service /frongo/add_model_defs /frongo/add_model_defs and script for testing this is added
+    * Update README.md
+    * Update README.md
+    * Adding predict state order service
+    * [Frongo] Now you can configure linear normalisation for float type models
+    * Update README.md
+    * Adding get_info service and test launch file
+  * returning epoch in request prediction service (#30 <https://github.com/strands-project/fremen/issues/30>)
+    * returning epoch in request prediction service
+    * Create README.md
+    * Now fremeniser can start without yaml file, yaml defs can be loaded through the service /frongo/add_model_defs /frongo/add_model_defs and script for testing this is added
+    * Update README.md
+    * Update README.md
+    * Adding predict state order service
+    * [Frongo] Now you can configure linear normalisation for float type models
+    * Update README.md
+  * Adding First Functional Version of Frongo (#29 <https://github.com/strands-project/fremen/issues/29>)
+  * Contributors: Jaime Pulido Fentanes, Marc Hanheide
+
+ -- Jaime Pulido Fentanes <JPulidoFentanes@lincoln.ac.uk>  Thu, 03 Nov 2016 00:00:00 -0000
+
+ros-melodic-frongo (0.2.1-1bionic) bionic; urgency=high
+
+
+
+ -- Jaime Pulido Fentanes <JPulidoFentanes@lincoln.ac.uk>  Wed, 17 Feb 2016 00:00:00 -0000
+
+ros-melodic-frongo (0.2.0-1bionic) bionic; urgency=high
+
+
+
+ -- Jaime Pulido Fentanes <JPulidoFentanes@lincoln.ac.uk>  Thu, 04 Feb 2016 00:00:00 -0000
+
+ros-melodic-frongo (0.1.3-1bionic) bionic; urgency=high
+
+
+
+ -- Jaime Pulido Fentanes <JPulidoFentanes@lincoln.ac.uk>  Tue, 07 Apr 2015 23:00:00 -0000
+
+ros-melodic-frongo (0.1.2-1bionic) bionic; urgency=high
+
+
+
+ -- Jaime Pulido Fentanes <JPulidoFentanes@lincoln.ac.uk>  Sun, 29 Mar 2015 23:00:00 -0000
+
+ros-melodic-frongo (0.1.1-1bionic) bionic; urgency=high
+
+
+
+ -- Jaime Pulido Fentanes <JPulidoFentanes@lincoln.ac.uk>  Wed, 04 Mar 2015 00:00:00 -0000
+
+ros-melodic-frongo (0.1.0-1bionic) bionic; urgency=high
+
+
+
+ -- Jaime Pulido Fentanes <JPulidoFentanes@lincoln.ac.uk>  Sat, 08 Nov 2014 00:00:00 -0000
+
+ros-melodic-frongo (0.0.3-1bionic) bionic; urgency=high
+
+
+
+ -- Jaime Pulido Fentanes <JPulidoFentanes@lincoln.ac.uk>  Thu, 06 Nov 2014 19:43:00 -0000
+
+ros-melodic-frongo (0.0.1-1bionic) bionic; urgency=high
+
+
+
+ -- Jaime Pulido Fentanes <JPulidoFentanes@lincoln.ac.uk>  Thu, 06 Nov 2014 04:16:00 -0000
+
+
