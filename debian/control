@@ -1,0 +1,13 @@
+Source: ros-melodic-froctomap
+Section: misc
+Priority: optional
+Maintainer: Tom Krajnik <tkrajnik@lincoln.ac.uk>
+Build-Depends: debhelper (>= 9.0.0), libfftw3-3, libfftw3-dev, libpcl-dev, ros-melodic-actionlib, ros-melodic-actionlib-msgs, ros-melodic-catkin, ros-melodic-genmsg, ros-melodic-message-generation, ros-melodic-message-runtime, ros-melodic-octomap, ros-melodic-octomap-server, ros-melodic-pcl-conversions, ros-melodic-pcl-ros, ros-melodic-roscpp, ros-melodic-rospy, ros-melodic-sensor-msgs, ros-melodic-std-msgs, ros-melodic-visualization-msgs
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-melodic-froctomap
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libfftw3-3, libfftw3-dev, libpcl-apps1.8, libpcl-common1.8, libpcl-features1.8, libpcl-filters1.8, libpcl-io1.8, libpcl-kdtree1.8, libpcl-keypoints1.8, libpcl-ml1.8, libpcl-octree1.8, libpcl-outofcore1.8, libpcl-people1.8, libpcl-recognition1.8, libpcl-registration1.8, libpcl-sample-consensus1.8, libpcl-search1.8, libpcl-segmentation1.8, libpcl-stereo1.8, libpcl-surface1.8, libpcl-tracking1.8, libpcl-visualization1.8, ros-melodic-actionlib, ros-melodic-actionlib-msgs, ros-melodic-genmsg, ros-melodic-message-runtime, ros-melodic-octomap, ros-melodic-octomap-server, ros-melodic-pcl-conversions, ros-melodic-pcl-ros, ros-melodic-roscpp, ros-melodic-rospy, ros-melodic-sensor-msgs, ros-melodic-std-msgs, ros-melodic-visualization-msgs
+Description: The FrOctoMap (Frequency Enhanced OctoMap) method allows for efficient volumetric representation of dynamic three-dimensional environments over long periods of time.
+ It is based on combination of a well-established 3D mapping framework called Octomaps and an idea to model environment dynamics by its frequency spectrum (FreMeN) [3]. The proposed method allows not only for efficient representation, but also reliable prediction of the future states of dynamic three-dimensional environments.
