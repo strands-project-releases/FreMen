@@ -1,0 +1,12 @@
+Source: ros-melodic-fremengrid
+Section: misc
+Priority: optional
+Maintainer: Tom Krajnik <tkrajnik@lincoln.ac.uk>
+Build-Depends: debhelper (>= 9.0.0), ros-melodic-actionlib, ros-melodic-actionlib-msgs, ros-melodic-catkin, ros-melodic-genmsg, ros-melodic-image-transport, ros-melodic-message-generation, ros-melodic-message-runtime, ros-melodic-move-base-msgs, ros-melodic-roscpp, ros-melodic-rospy, ros-melodic-sensor-msgs, ros-melodic-std-msgs, ros-melodic-tf, ros-melodic-visualization-msgs
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-melodic-fremengrid
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-melodic-actionlib, ros-melodic-actionlib-msgs, ros-melodic-genmsg, ros-melodic-image-transport, ros-melodic-message-runtime, ros-melodic-move-base-msgs, ros-melodic-roscpp, ros-melodic-rospy, ros-melodic-sensor-msgs, ros-melodic-std-msgs, ros-melodic-tf, ros-melodic-visualization-msgs
+Description: Frequency Map Enhanced 3D occupancy grid - non uniform Fourier transform version
