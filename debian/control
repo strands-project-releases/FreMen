@@ -1,0 +1,12 @@
+Source: ros-melodic-frongoweb
+Section: misc
+Priority: optional
+Maintainer: Marc Hanheide <marc@hanheide.net>
+Build-Depends: debhelper (>= 9.0.0), python-webpy, ros-melodic-catkin, ros-melodic-frongo, ros-melodic-rospy
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-melodic-frongoweb
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, python-webpy, ros-melodic-frongo, ros-melodic-rospy
+Description: The frongoweb package
